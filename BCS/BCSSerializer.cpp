@@ -1,13 +1,13 @@
 #include <BCSSerializer.h>
 
-// the implementation of the serealiazation functions
-
 BCS::BCSSerializer::BCSSerializer() {
     buffer = std::vector<uint8_t>();
 }
 
 BCS::BCSSerializer::~BCSSerializer() {
 }
+
+// the implementation of the serealiazation functions
 
 /**
  * @brief serialize an 8 bit unsigned integer
