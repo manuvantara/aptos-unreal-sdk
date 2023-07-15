@@ -56,3 +56,12 @@ void BCS::BCSSerializer::serializeU128(__uint128_t value) {
         buffer.push_back((value >> (i * 8)) & 0xFF);
     }
 }
+
+/**
+ * @brief serialize a string
+ * @param value
+ */
+void BCS::BCSSerializer::serializeString(std::string& value) {
+    serializeU32(static_cast<unsigned int>(value.size()));
+    buffer.insert(buffer.end(), value.begin(), value.end());
+}

@@ -65,3 +65,14 @@ __uint128_t BCS::BCSDeserializer::deserializeU128() {
     }
     return value;
 }
+
+/**
+ * @brief deserialize a string
+ * @return 
+ */
+std::string BCS::BCSDeserializer::deserializeString() {
+    unsigned int length = deserializeU32();
+    std::string value(buffer.begin() + index, buffer.begin() + index + length);
+    index += length;
+    return value;
+}

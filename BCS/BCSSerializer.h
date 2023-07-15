@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <cstdint>
+#include <string>
 
 namespace BCS
 {
@@ -15,7 +16,9 @@ namespace BCS
         void serializeU32(unsigned int value);
         void serializeU64(unsigned long long value);
         void serializeU128(__uint128_t value);
+        void serializeString(std::string& value);
 
+        std::vector<unsigned char> getBuffer() const { return buffer; }
     private:
         std::vector<unsigned char> buffer;
     };
