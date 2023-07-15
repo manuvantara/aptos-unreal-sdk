@@ -65,3 +65,11 @@ void BCS::BCSSerializer::serializeString(std::string& value) {
     serializeU32(static_cast<unsigned int>(value.size()));
     buffer.insert(buffer.end(), value.begin(), value.end());
 }
+
+/**
+ * @brief serialize a boolean
+ * @param value
+ */
+void BCS::BCSSerializer::serializeBool(bool value) {
+    buffer.push_back(value ? 1 : 0);
+}

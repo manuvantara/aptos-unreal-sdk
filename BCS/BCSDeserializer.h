@@ -18,6 +18,7 @@ namespace BCS
         unsigned long long deserializeU64();
         __uint128_t deserializeU128();
         std::string deserializeString();
+        bool deserializeBool();
 
     private:
         std::vector<uint8_t> buffer;
