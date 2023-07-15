@@ -17,6 +17,7 @@ namespace BCS
         void serializeU64(unsigned long long value);
         void serializeU128(__uint128_t value);
         void serializeString(std::string& value);
+        void serializeBool(bool value);
 
         std::vector<unsigned char> getBuffer() const { return buffer; }
     private:
