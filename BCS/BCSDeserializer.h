@@ -4,6 +4,7 @@
 #include <vector>
 #include <cstdint>
 #include <cstddef>
+#include <string>
 
 namespace BCS
 {
@@ -16,6 +17,7 @@ namespace BCS
         unsigned int deserializeU32();
         unsigned long long deserializeU64();
         __uint128_t deserializeU128();
+        std::string deserializeString();
 
     private:
         std::vector<uint8_t> buffer;
