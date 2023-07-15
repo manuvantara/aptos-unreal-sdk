@@ -1,4 +1,4 @@
-#include <BCSSerializer.h>
+#include "BCSSerializer.h"
 
 BCS::BCSSerializer::BCSSerializer() {
     buffer = std::vector<uint8_t>();
@@ -13,7 +13,7 @@ BCS::BCSSerializer::~BCSSerializer() {
  * @brief serialize an 8 bit unsigned integer
  * @param value
  */
-void BCS::BCSSerializer::serealizeU8(unsigned char value) {
+void BCS::BCSSerializer::serializeU8(unsigned char value) {
     buffer.push_back(value);
 }
 

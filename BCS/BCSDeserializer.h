@@ -25,6 +25,12 @@ namespace BCS
         std::vector<unsigned char> deserializeFixedBytesVector(unsigned int size);
         unsigned char* deserializeFixedBytesArray(unsigned int size);
 
+        // Overloaded functions for convenience (and usage with generic types)
+        template<typename T>
+        T deserialize();
+        template<typename T>
+        T deserializeFixed(unsigned int size);
+
     private:
         std::vector<uint8_t> buffer;
         size_t index;
