@@ -25,6 +25,15 @@ namespace BCS
         std::vector<unsigned char> deserializeFixedBytesVector(unsigned int size);
         unsigned char* deserializeFixedBytesArray(unsigned int size);
 
+        // Complex types
+        // vector
+        template<typename T>
+        std::vector<T> deserialize();
+        
+        // tuple
+        template<typename... T>
+        std::tuple<T...> deserialize();
+
         // Overloaded functions for convenience (and usage with generic types)
         template<typename T>
         T deserialize();

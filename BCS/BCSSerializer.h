@@ -4,6 +4,7 @@
 #include <vector>
 #include <cstdint>
 #include <string>
+#include <tuple>
 
 namespace BCS
 {
@@ -25,6 +26,14 @@ namespace BCS
         void serializeFixedBytes(unsigned char* value, unsigned int size);
 
         // Complex types
+        // vector
+        template<typename T>
+        void serialize(std::vector<T>& value);
+
+        // tuple
+        template<typename... T>
+        void serialize(std::tuple<T...>& value);
+
 
         // Overloaded functions for convenience (and usage with generic types)
         void serialize(unsigned char value) { serializeU8(value); }
