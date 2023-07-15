@@ -1,4 +1,4 @@
-#include <BCSDeserializer.h>
+#include "BCSDeserializer.h"
 
 BCS::BCSDeserializer::BCSDeserializer(std::vector<uint8_t> buffer) {
     this->buffer = buffer;
@@ -148,3 +148,73 @@ unsigned char* BCS::BCSDeserializer::deserializeFixedBytesArray(unsigned int siz
     }
     return value;
 }
+
+// the implementation of the overloaded functions
+
+template<typename T>
+T BCS::BCSDeserializer::deserialize() {
+    static_assert(sizeof(T) == -1, "Unsupported type for deserialization");
+    // Default deserialization function, generates a compilation error
+}
+
+template<>
+unsigned char BCS::BCSDeserializer::deserialize<unsigned char>() {
+    return deserializeU8();
+}
+
+template<>
+unsigned short BCS::BCSDeserializer::deserialize<unsigned short>() {
+    return deserializeU16();
+}
+
+template<>
+unsigned int BCS::BCSDeserializer::deserialize<unsigned int>() {
+    return deserializeU32();
+}
+
+template<>
+unsigned long long BCS::BCSDeserializer::deserialize<unsigned long long>() {
+    return deserializeU64();
+}
+
+template<>
+__uint128_t BCS::BCSDeserializer::deserialize<__uint128_t>() {
+    return deserializeU128();
+}
+
+template<>
+std::string BCS::BCSDeserializer::deserialize<std::string>() {
+    return deserializeString();
+}
+
+template<>
+bool BCS::BCSDeserializer::deserialize<bool>() {
+    return deserializeBool();
+}
+
+template<>
+std::vector<unsigned char> BCS::BCSDeserializer::deserialize<std::vector<unsigned char>>() {
+    return deserializeBytesVector();
+}
+
+template<>
+unsigned char* BCS::BCSDeserializer::deserialize<unsigned char*>() {
+    return deserializeBytesArray();
+}
+
+template<typename T>
+T BCS::BCSDeserializer::deserializeFixed(unsigned int size) {
+    static_assert(sizeof(T) == -1, "Unsupported type for deserialization");
+    // Default deserialization function, generates a compilation error
+}
+
+template<>
+std::vector<unsigned char> BCS::BCSDeserializer::deserializeFixed<std::vector<unsigned char>>(unsigned int size) {
+    return deserializeFixedBytesVector(size);
+}
+
+template<>
+unsigned char* BCS::BCSDeserializer::deserializeFixed<unsigned char*>(unsigned int size) {
+    return deserializeFixedBytesArray(size);
+}
+
