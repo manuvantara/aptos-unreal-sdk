@@ -19,6 +19,11 @@ namespace BCS
         __uint128_t deserializeU128();
         std::string deserializeString();
         bool deserializeBool();
+        unsigned int deserializeUleb128AsU32();
+        std::vector<unsigned char> deserializeBytesVector();
+        unsigned char* deserializeBytesArray();
+        std::vector<unsigned char> deserializeFixedBytesVector(unsigned int size);
+        unsigned char* deserializeFixedBytesArray(unsigned int size);
 
     private:
         std::vector<uint8_t> buffer;

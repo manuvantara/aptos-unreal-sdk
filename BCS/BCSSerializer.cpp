@@ -62,7 +62,7 @@ void BCS::BCSSerializer::serializeU128(__uint128_t value) {
  * @param value
  */
 void BCS::BCSSerializer::serializeString(std::string& value) {
-    serializeU32(static_cast<unsigned int>(value.size()));
+    serializeU32AsUleb128(value.size());
     buffer.insert(buffer.end(), value.begin(), value.end());
 }
 
@@ -72,4 +72,55 @@ void BCS::BCSSerializer::serializeString(std::string& value) {
  */
 void BCS::BCSSerializer::serializeBool(bool value) {
     buffer.push_back(value ? 1 : 0);
+}
+
+/**
+ * @brief serialize a 32 bit unsigned integer as a ULEB128
+ * @param value
+ */
+void BCS::BCSSerializer::serializeU32AsUleb128(unsigned int value) {
+    do {
+        unsigned char byte = value & 0x7F;
+        value >>= 7;
+        if(value != 0) {
+            byte |= 0x80;
+        }
+        buffer.push_back(byte);
+    } while(value != 0);
+}
+
+/**
+ * @brief serialize a vector of bytes
+ * @param value
+ */
+void BCS::BCSSerializer::serializeBytes(std::vector<unsigned char>& value) {
+    serializeU32AsUleb128(value.size());
+    buffer.insert(buffer.end(), value.begin(), value.end());
+}
+
+/**
+ * @brief serialize a byte array
+ * @param value
+ * @param size
+ */
+void BCS::BCSSerializer::serializeBytes(unsigned char* value, unsigned int size) {
+    serializeU32AsUleb128(size);
+    buffer.insert(buffer.end(), value, value + size);
+}
+
+/**
+ * @brief serialize a vector of bytes without the length (if the length is known)
+ * @param value
+ */
+void BCS::BCSSerializer::serializeFixedBytes(std::vector<unsigned char>& value) {
+    buffer.insert(buffer.end(), value.begin(), value.end());
+}
+
+/**
+ * @brief serialize a byte array without the length (if the length is known)
+ * @param value
+ * @param size
+ */
+void BCS::BCSSerializer::serializeFixedBytes(unsigned char* value, unsigned int size) {
+    buffer.insert(buffer.end(), value, value + size);
 }
