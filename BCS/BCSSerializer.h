@@ -18,6 +18,11 @@ namespace BCS
         void serializeU128(__uint128_t value);
         void serializeString(std::string& value);
         void serializeBool(bool value);
+        void serializeU32AsUleb128(unsigned int value);
+        void serializeBytes(std::vector<unsigned char>& value);
+        void serializeBytes(unsigned char* value, unsigned int size);
+        void serializeFixedBytes(std::vector<unsigned char>& value);
+        void serializeFixedBytes(unsigned char* value, unsigned int size);
 
         std::vector<unsigned char> getBuffer() const { return buffer; }
     private:
