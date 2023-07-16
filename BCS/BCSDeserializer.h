@@ -5,7 +5,8 @@
 #include <cstdint>
 #include <cstddef>
 #include <string>
-
+#include <tuple>
+#include "BCSTypes.h"
 namespace BCS
 {
     class BCSDeserializer {
