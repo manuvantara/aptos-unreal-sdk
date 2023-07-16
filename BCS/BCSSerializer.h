@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <string>
 #include <tuple>
+#include "BCSTypes.h"
 
 namespace BCS
 {
@@ -36,6 +37,7 @@ namespace BCS
 
 
         // Overloaded functions for convenience (and usage with generic types)
+        void serialize(ISerializable& value) { value.serialize(*this); }
         void serialize(unsigned char value) { serializeU8(value); }
         void serialize(unsigned short value) { serializeU16(value); }
         void serialize(unsigned int value) { serializeU32(value); }
