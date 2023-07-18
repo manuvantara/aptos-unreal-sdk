@@ -2,6 +2,9 @@
 #include "BCSDeserializer.h"
 
 #include <iostream>
+#include <vector>
+#include <string>
+#include <tuple>
 #define IS_TRUE(x) { if (!(x)) std::cout << __FUNCTION__ << " failed on line " << __LINE__ << std::endl; else std::cout << __FUNCTION__ << " passed on line " << __LINE__ << std::endl; }
 
 int main() {
@@ -12,7 +15,7 @@ int main() {
     serializer.serializeU16(0x0203);
     serializer.serializeU32(0x04050607);
     serializer.serializeU64(0x08090A0B0C0D0E0F);
-    // serializer.serializeU128(0x101112131415161718191A1B1C1D1E1F);
+    serializer.serializeU128(0x08090A0B0C0D0E0F);
     std::string str = "Hello World!";
     serializer.serializeString(str);
     serializer.serializeBool(true);
@@ -32,7 +35,7 @@ int main() {
     IS_TRUE(deserializer.deserializeU16() == 0x0203);
     IS_TRUE(deserializer.deserializeU32() == 0x04050607);
     IS_TRUE(deserializer.deserializeU64() == 0x08090A0B0C0D0E0F);
-    // IS_TRUE(deserializer.deserializeU128() == 0x101112131415161718191A1B1C1D1E1F);
+    IS_TRUE(deserializer.deserializeU128() == 0x08090A0B0C0D0E0F);
     IS_TRUE(deserializer.deserializeString() == "Hello World!");
     IS_TRUE(deserializer.deserializeBool() == true);
     IS_TRUE(deserializer.deserializeUleb128AsU32() == 0x04030201);
@@ -49,4 +52,15 @@ int main() {
     IS_TRUE(fixedBytesArray2[2] == 0x0F);
     IS_TRUE(fixedBytesArray2[3] == 0x10);
 
+    // test complex types
+    // std::vector<unsigned int> bytesVector2 = {0x01020304, 0x05060708, 0x090A0B0C};
+    // serializer.serialize<unsigned int>(bytesVector2);
+    // IS_TRUE(deserializer.deserializeVector<unsigned int>() == bytesVector2);
+    
+    // std::tuple<unsigned int, unsigned int, unsigned int> bytesTuple = {0x01020304, 0x05060708, 0x090A0B0C};
+    // serializer.serialize(bytesTuple);
+    // std::tuple tuple2 = deserializer.deserializeTuple<unsigned int, unsigned int, unsigned int>();
+    // IS_TRUE(std::get<0>(tuple2) == 0x01020304);
+    // IS_TRUE(std::get<1>(tuple2) == 0x05060708);
+    // IS_TRUE(std::get<2>(tuple2) == 0x090A0B0C);
 }

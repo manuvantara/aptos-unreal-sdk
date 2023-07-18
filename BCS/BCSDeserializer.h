@@ -7,6 +7,7 @@
 #include <string>
 #include <tuple>
 #include "BCSTypes.h"
+#include "BCSSerializer.h"
 namespace BCS
 {
     class BCSDeserializer {
@@ -29,11 +30,11 @@ namespace BCS
         // Complex types
         // vector
         template<typename T>
-        std::vector<T> deserialize();
+        std::vector<T> deserializeVector();
         
         // tuple
         template<typename... T>
-        std::tuple<T...> deserialize();
+        std::tuple<T...> deserializeTuple();
 
         // Overloaded functions for convenience (and usage with generic types)
         template<typename T>
