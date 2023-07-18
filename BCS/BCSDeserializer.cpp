@@ -156,7 +156,7 @@ unsigned char* BCS::BCSDeserializer::deserializeFixedBytesArray(unsigned int siz
  * @return deserialized vector
  */
 template<typename T>
-std::vector<T> BCS::BCSDeserializer::deserialize() {
+std::vector<T> BCS::BCSDeserializer::deserializeVector() {
     unsigned int length = deserializeUleb128AsU32();
     std::vector<T> value;
     for(unsigned int i = 0; i < length; i++) {
@@ -170,7 +170,7 @@ std::vector<T> BCS::BCSDeserializer::deserialize() {
  * @return deserialized tuple
  */
 template<typename... T>
-std::tuple<T...> BCS::BCSDeserializer::deserialize() {
+std::tuple<T...> BCS::BCSDeserializer::deserializeTuple() {
     return std::make_tuple(deserialize<T>()...);
 }
 
