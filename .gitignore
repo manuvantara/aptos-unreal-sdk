@@ -72,3 +72,12 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+# Cmake files
+CMakeCache.txt
+CMakeFiles
+cmake_install.cmake
+Makefile
+CTestTestfile.cmake
+build/Testing
+DartConfiguration.tcl

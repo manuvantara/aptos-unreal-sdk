@@ -149,33 +149,6 @@ unsigned char* BCS::BCSDeserializer::deserializeFixedBytesArray(unsigned int siz
     return value;
 }
 
-// the implementation of the complex types deserialization functions
-
-/**
- * @brief deserialize a vector of a given type
- * @return deserialized vector
- */
-template<typename T>
-std::vector<T> BCS::BCSDeserializer::deserializeVector() {
-    unsigned int length = deserializeUleb128AsU32();
-    std::vector<T> value;
-    for(unsigned int i = 0; i < length; i++) {
-        value.push_back(deserialize<T>());
-    }
-    return value;
-}
-
-/**
- * @brief deserialize a tuple of a given type
- * @return deserialized tuple
- */
-template<typename... T>
-std::tuple<T...> BCS::BCSDeserializer::deserializeTuple() {
-    return std::make_tuple(deserialize<T>()...);
-}
-
-
-
 // the implementation of the overloaded functions
 
 template<typename T>
