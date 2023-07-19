@@ -6,7 +6,6 @@
 #include <cstddef>
 #include <string>
 #include <tuple>
-#include "BCSTypes.h"
 #include "BCSSerializer.h"
 namespace BCS
 {
@@ -30,11 +29,20 @@ namespace BCS
         // Complex types
         // vector
         template<typename T>
-        std::vector<T> deserializeVector();
+        std::vector<T> deserializeVector() {
+            unsigned int length = deserializeUleb128AsU32();
+            std::vector<T> value;
+            for(unsigned int i = 0; i < length; i++) {
+                value.push_back(deserialize<T>());
+            }
+            return value;
+        }
         
         // tuple
         template<typename... T>
-        std::tuple<T...> deserializeTuple();
+        std::tuple<T...> deserializeTuple() {
+            return std::make_from_tuple<std::tuple<T...>>(std::tuple<T...>{deserialize<T>()...});
+        }
 
         // Overloaded functions for convenience (and usage with generic types)
         template<typename T>
@@ -42,6 +50,11 @@ namespace BCS
         template<typename T>
         T deserializeFixed(unsigned int size);
 
+
+        void updateBuffer(std::vector<uint8_t> buffer) {
+            this -> buffer = buffer;
+            index = 0;
+        }
     private:
         std::vector<uint8_t> buffer;
         size_t index;

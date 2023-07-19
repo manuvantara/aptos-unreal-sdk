@@ -5,8 +5,6 @@
 #include <cstdint>
 #include <string>
 #include <tuple>
-#include "BCSTypes.h"
-#include "BCSDeserializer.h"
 
 namespace BCS
 {
@@ -30,11 +28,22 @@ namespace BCS
         // Complex types
         // vector
         template<typename T>
-        void serialize(std::vector<T>& value);
+        void serialize(std::vector<T>& value) {
+            serializeU32AsUleb128(value.size());
+            for(auto& element : value) {
+                try {
+                    this -> serialize(element);
+                } catch(...) {
+                    throw;
+                }
+            }
+        }
 
         // tuple
         template<typename... T>
-        void serialize(std::tuple<T...>& value);
+        void serialize(std::tuple<T...>& value) {
+            std::apply([&](auto&&... args) { (serialize(args), ...); }, value);
+        }
 
 
         // Overloaded functions for convenience (and usage with generic types)
@@ -52,6 +61,8 @@ namespace BCS
         void serializeFixed(unsigned char* value, unsigned int size) { serializeFixedBytes(value, size); }
 
         std::vector<unsigned char> getBuffer() const { return buffer; }
+
+        void clearBuffer() { buffer.clear(); }
     private:
         std::vector<unsigned char> buffer;
     };

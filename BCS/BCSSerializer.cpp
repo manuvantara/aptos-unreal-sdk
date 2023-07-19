@@ -125,25 +125,3 @@ void BCS::BCSSerializer::serializeFixedBytes(unsigned char* value, unsigned int 
     buffer.insert(buffer.end(), value, value + size);
 }
 
-// the implementation of the complex types serialization functions
-
-/**
- * @brief serialize a vector of any type
- * @param value
- */
-template<typename T>
-void BCS::BCSSerializer::serialize(std::vector<T>& value) {
-    serializeU32AsUleb128(value.size());
-    for(auto& element : value) {
-        serialize(element);
-    }
-}
-
-/**
- * @brief serialize a tuple of any type
- * @param value
- */
-template<typename... T>
-void BCS::BCSSerializer::serialize(std::tuple<T...>& value) {
-    std::apply([&](auto&&... args) { (serialize(args), ...); }, value);
-}
