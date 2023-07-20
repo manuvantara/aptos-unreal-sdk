@@ -1,0 +1,25 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Build
+      run: |
+        if [ ! -d "build" ]; then
+          mkdir build
+        fi
+        cd build
+        cmake ..
+        cmake --build .
+
+    - name: Run Catch2 Tests
+      run: |
+        cd build
+        ctest --output-on-failure -T Test

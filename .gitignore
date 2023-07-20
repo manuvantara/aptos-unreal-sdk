@@ -81,3 +81,6 @@ Makefile
 CTestTestfile.cmake
 build/Testing
 DartConfiguration.tcl
+
+# Test results
+test_results.xml
