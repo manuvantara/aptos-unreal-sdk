@@ -116,6 +116,14 @@ TEST_CASE("BCS Complex types") {
         std::tuple<unsigned int, unsigned int, std::string> tuple = {0x04, 0x05, "test"};
         serializer.serialize(tuple);
 
+        enum class TestEnum : unsigned int {
+            TEST1 = 0x01,
+            TEST2 = 0x02,
+            TEST3 = 0x03
+        };
+
+        serializer.serializeEnum<TestEnum>(TestEnum::TEST2);
+
         deserializer.updateBuffer(serializer.getBuffer());
 
         std::vector<unsigned int> vector3 = deserializer.deserializeVector<unsigned int>();
@@ -125,5 +133,8 @@ TEST_CASE("BCS Complex types") {
         REQUIRE(std::get<0>(tuple3) == 0x04);
         REQUIRE(std::get<1>(tuple3) == 0x05);
         REQUIRE(std::get<2>(tuple3) == "test");
+
+        TestEnum testEnum = deserializer.deserializeEnum<TestEnum>();
+        REQUIRE(testEnum == TestEnum::TEST2);
     }
 }

@@ -44,6 +44,20 @@ namespace BCS
             return std::make_from_tuple<std::tuple<T...>>(std::tuple<T...>{deserialize<T>()...});
         }
 
+        // deserialize an enum
+        template<typename T>
+        T deserializeEnum() {
+            return static_cast<T>(deserializeUleb128AsU32());
+        }
+
+        // struct
+        template<typename T>
+        T deserializeStruct() {
+            T value;
+            value.deserialize(*this);
+            return value;
+        }
+
         // Overloaded functions for convenience (and usage with generic types)
         template<typename T>
         T deserialize();

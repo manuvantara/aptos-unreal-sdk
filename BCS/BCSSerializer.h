@@ -45,6 +45,18 @@ namespace BCS
             std::apply([&](auto&&... args) { (serialize(args), ...); }, value);
         }
 
+        // serialize an enum
+        template<typename T>
+        void serializeEnum(T value) {
+            serializeU32AsUleb128(static_cast<unsigned int>(value));
+        }
+
+        // struct
+        template<typename T>
+        void serialize(T& value) {
+            value.serialize(*this);
+        }
+
 
         // Overloaded functions for convenience (and usage with generic types)
         // void serialize(ISerializable& value) { value.serialize(*this); }
