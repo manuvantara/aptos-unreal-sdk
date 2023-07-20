@@ -1,4 +1,7 @@
 # Aptos Unreal Engine SDK
+> The SDK is currently being developed <br>
+> SDK specification: [SDK Specification](https://github.com/aptos-foundation/registry-projects/blob/main/registry/unreal_sdk.md)
+
 ### Progress:
 ### 1. BCS Encoding & Decoding
 #### Serialization / Deserialization implemented for:
@@ -9,4 +12,9 @@
 - [x] Bool
 - [x] Vectors
 - [x] Tuples
-- [ ] Enums
+- [x] Enums
+- [x] Structs unsing theis own serialization
+- [ ] Account address
+
+### 2. API servers
+#### The SDK must interact directly with the Aptos REST API.
