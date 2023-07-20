@@ -13,7 +13,7 @@
 using namespace BCS;
 
 // testing the BCS functions
-TEST_CASE("BCS UInt") {
+TEST_CASE("BCS UInt", "[BCS]") {
     BCS::BCSSerializer serializer;
     BCS::BCSDeserializer deserializer(serializer.getBuffer());
 
@@ -52,7 +52,7 @@ TEST_CASE("BCS UInt") {
     }
 }
 
-TEST_CASE("BCS Str Bool Uleb") {
+TEST_CASE("BCS Str Bool Uleb", "[BCS]") {
     BCS::BCSSerializer serializer;
     BCS::BCSDeserializer deserializer(serializer.getBuffer());
 
@@ -71,7 +71,7 @@ TEST_CASE("BCS Str Bool Uleb") {
     }
 }
 
-TEST_CASE("BCS Byte arrays") {
+TEST_CASE("BCS Byte arrays", "[BCS]") {
     BCS::BCSSerializer serializer;
     BCS::BCSDeserializer deserializer(serializer.getBuffer());
 
@@ -103,7 +103,7 @@ TEST_CASE("BCS Byte arrays") {
     }
 }
 
-TEST_CASE("BCS Complex types") {
+TEST_CASE("BCS Complex types", "[BCS]") {
     BCS::BCSSerializer serializer;
     BCS::BCSDeserializer deserializer(serializer.getBuffer());
 

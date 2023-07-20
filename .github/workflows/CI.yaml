@@ -21,4 +21,6 @@ jobs:
         cmake --build .
 
     - name: Run Catch2 Tests
-      run: ./build/UnitTests --reporter junit --out test_results.xml
+      run: |
+        cd build
+        ctest --output-on-failure -T Test

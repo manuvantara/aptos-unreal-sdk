@@ -26,3 +26,6 @@ target_include_directories(UnitTests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
 # Include Catch2 header file directly in the test file
 target_compile_definitions(UnitTests PRIVATE CATCH_CONFIG_MAIN)
+
+# Add the test as a test target for ctest
+add_test(NAME UnitTests COMMAND UnitTests)
