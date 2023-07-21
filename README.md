@@ -1,3 +1,5 @@
+![GitHub tag (with filter)](https://img.shields.io/github/v/tag/manuvantara/aptos-unreal-sdk?label=version)
+
 # Aptos Unreal Engine SDK
 > The SDK is currently being developed <br>
 > SDK specification: [SDK Specification](https://github.com/aptos-foundation/registry-projects/blob/main/registry/unreal_sdk.md)
