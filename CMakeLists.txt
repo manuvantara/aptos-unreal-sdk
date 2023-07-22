@@ -32,6 +32,12 @@ add_executable(BCSTests
 add_executable(HexStringTests
     tests/hexStringTests.cpp
 )
+add_executable(AccountAddressTests
+    tests/accountAddressTests.cpp
+)
+
+#Link Aptos Types to Utils
+target_link_libraries(AptosTypes PRIVATE Utils)
 
 # Link against the BCS library
 target_link_libraries(BCSTests PRIVATE BCS)
@@ -39,14 +45,21 @@ target_link_libraries(BCSTests PRIVATE BCS)
 # Link against the utils library
 target_link_libraries(HexStringTests PRIVATE Utils)
 
-# Include Catch2
+# Link against the aptos types library
+target_link_libraries(AccountAddressTests PRIVATE AptosTypes)
+target_link_libraries(AccountAddressTests PRIVATE BCS)
+
+# Include Catch2 folder
 target_include_directories(BCSTests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 target_include_directories(HexStringTests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+target_include_directories(AccountAddressTests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
 # Include Catch2 header file directly in the test files
 target_compile_definitions(BCSTests PRIVATE CATCH_CONFIG_MAIN)
 target_compile_definitions(HexStringTests PRIVATE CATCH_CONFIG_MAIN)
+target_compile_definitions(AccountAddressTests PRIVATE CATCH_CONFIG_MAIN)
 
 # Add the test as a test target for ctest
 add_test(NAME BCSTests COMMAND BCSTests)
 add_test(NAME HexStringTests COMMAND HexStringTests)
+add_test(NAME AccountAddressTests COMMAND AccountAddressTests)
