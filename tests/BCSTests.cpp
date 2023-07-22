@@ -5,10 +5,13 @@
 
 #include "../lib/catch.hpp"
 
+#ifndef CATCH_CONFIG_MAIN
 #define CATCH_CONFIG_MAIN
 
-#include "BCSSerializer.h"
-#include "BCSDeserializer.h"
+#endif
+
+#include "../BCS/BCSSerializer.h"
+#include "../BCS/BCSDeserializer.h"
 
 using namespace BCS;
 

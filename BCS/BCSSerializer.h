@@ -20,9 +20,9 @@ namespace BCS
         void serializeString(std::string& value);
         void serializeBool(bool value);
         void serializeU32AsUleb128(unsigned int value);
-        void serializeBytes(std::vector<unsigned char>& value);
+        void serializeBytes(std::vector<unsigned char> value);
         void serializeBytes(unsigned char* value, unsigned int size);
-        void serializeFixedBytes(std::vector<unsigned char>& value);
+        void serializeFixedBytes(std::vector<uint8_t> value);
         void serializeFixedBytes(unsigned char* value, unsigned int size);
 
         // Complex types

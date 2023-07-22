@@ -12,6 +12,10 @@ namespace BCS
     class BCSDeserializer {
     public:
         BCSDeserializer(std::vector<uint8_t> buffer);
+        BCSDeserializer() { 
+            index = 0;
+            buffer = std::vector<uint8_t>();
+        }
         ~BCSDeserializer();
         unsigned char deserializeU8();
         unsigned short deserializeU16();
