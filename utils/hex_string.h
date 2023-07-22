@@ -11,6 +11,7 @@ public:
     static HexString fromUint8Array(const std::vector<uint8_t>& arr);
     static HexString ensure(const std::string& hexString);
     explicit HexString(const std::string& hexString);
+    explicit HexString(const std::vector<uint8_t>& arr);
 
     std::string hex() const;
     std::string noPrefix() const;

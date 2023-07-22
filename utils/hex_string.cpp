@@ -44,6 +44,20 @@ HexString::HexString(const std::string& hexString){
 }
 
 /**
+ * Creates new HexString instance from uint8 vector
+ * 
+ * @param arr The uint8 vector to convert
+*/
+HexString::HexString(const std::vector<uint8_t>& arr) {
+    hexString = "0x";
+    for (const uint8_t& byte : arr) {
+        char hexByte[3];
+        sprintf(hexByte, "%02x", byte);
+        hexString += hexByte;
+    }
+}
+
+/**
  * @brief Get the hex string
  * 
  * @return std::string The hex string
